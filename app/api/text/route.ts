@@ -26,12 +26,6 @@ export async function POST(req: NextRequest) {
         }
         const text = choices[0].message?.content;
 
-        /*const deploymentName = "gpt-35-turbo";
-        const messages = [{ role: "user", content: "When was Microsoft founded?" }];
-        const { choices }  = await client.getChatCompletions(deploymentName, messages);
-        console.log("api choices:",choices);
-        const text = choices[0].message?.content;*/
-
         return NextResponse.json({
             text
         });

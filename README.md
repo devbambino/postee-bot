@@ -19,3 +19,5 @@ Here's what you get:
 ### Image 1
 
 ## Tech behind
+
+Using Azure OpenAI javascript SDK from (here)[https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview]

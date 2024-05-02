@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     //Available models are: gpt-4, gpt-35-turbo-16k, text-embedding-ada-002, text-embedding-3-small, gpt-4-vision, gpt-4-32k, gpt-35-turbo"
-    const { userPrompt } = await req.json();
+    const { media, userPrompt } = await req.json();
     const deploymentModelName = process.env.DEPLOY_MODEL_NAME_TEXT as string;
 
     const client = new OpenAIClient(process.env.AZURE_OPENAI_ENDPOINT as string, new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY as string));
@@ -13,6 +13,13 @@ export async function POST(req: NextRequest) {
     const systemPromptInstagram = "You're an Instagram storyteller, skilled at capturing attention with visually-driven posts. The user is providing you a HTML code featuring product details, extract the necessary information and generate a creative and eye-catching marketing copy ideal for Instagram. The copy should include appropriate emojis to enhance visual appeal and engagement, in line with Instagram's image-centric platform. Keep it concise and impactful, the marketing copy must be between 150-250 words, using a creative and engaging writing style. Finish with up to 7 relevant, single-word hashtags to boost discoverability. The text should be structured as several paragraphs and could include bullet points(using an emoji as the bullet that correspond to the text described) if needed. The hashtags must be always single words and don't have any other special characters beside the '#' such as '\'. Remember, focus solely on crafting the perfect marketing copy and hashtags – no additional notes or instructions. THE RESPONSE MUST BE ALWAYS WRITTEN IN ENGLISH.";
 
     const systemPromptFacebook = "Imagine you're a skilled blogger with a knack for crafting engaging Facebook posts that resonate with a diverse audience. The user is providing you a HTML code containing product information, extract the details and generate a vibrant and engaging marketing copy suitable for posting on Facebook. Please incorporate emoticons in the copy, where relevant, to make it more appealing and interactive for the Facebook audience. The marketing copy must be between 150-250 words. Use a charming and friendly writing style to connect with readers, and incorporate bullet points with emojis if appropriate. Finish with up to 7 relevant single-word hashtags. The text should be structured as several paragraphs and could include bullet points(using an emoji as the bullet that correspond to the text described) if needed. The hashtags must be always single words and don't have any other special characters beside the '#' such as '\'. Remember, no extra commentary – just a captivating post with relevant hashtags. THE RESPONSE MUST BE ALWAYS WRITTEN IN ENGLISH.";
+
+    let systemPrompt = systemPromptLinkedin;
+    if (media == "facebook") {
+      systemPrompt = systemPromptFacebook;
+    } else if (media == "instagram") {
+      systemPrompt = systemPromptInstagram;
+    }
 
     // Possible content safety implementation
     //https://learn.microsoft.com/en-us/javascript/api/overview/azure/ai-content-safety-rest-readme?view=azure-node-preview
@@ -29,7 +36,7 @@ export async function POST(req: NextRequest) {
         }
         const dataScraping32k = dataScrapingBody.substring(0, limit32k);
         const messages = [
-            { role: "system", content: systemPromptLinkedin },
+            { role: "system", content: systemPrompt },
             { role: "user", content: dataScraping32k },
         ];
 

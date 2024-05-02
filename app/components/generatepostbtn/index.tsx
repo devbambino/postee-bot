@@ -1,13 +1,13 @@
 interface GeneratePostButtonProps {
-    link: string;
+    description: string;
     onButtonClicked: () => void;
 }
 
-export default function GeneratePostButton({ link, onButtonClicked }: GeneratePostButtonProps) {
+export default function GeneratePostButton({ description, onButtonClicked }: GeneratePostButtonProps) {
     return (
         <button
-            className="inline-flex text-center justify-center items-center md:w-1/2 w-full font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50"
-            disabled={!link}
+            className="inline-flex text-center justify-center items-center w-full md:w-auto order-1 m-2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50"
+            disabled={!description}
             onClick={onButtonClicked}
         >
             <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

@@ -19,7 +19,7 @@ export default function Welcome({ types, onTypeSelect }: WelcomeProps) {
                         We create compelling marketing posts from whatever you shared with us:
                     </p>
                     <div className="mx-auto w-[400px] mt-8">
-                        <div className="grid grid-cols-3 gap-4 text-green-500">
+                        <div className="grid grid-cols-2 gap-4 text-green-500">
                             {types.map(({ value, name, Icon }) => (
                                 <div
                                     key={value}

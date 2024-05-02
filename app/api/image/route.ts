@@ -1,9 +1,9 @@
-import { OpenAIClient, AzureKeyCredential } from '@azure/openai';
+import { OpenAIClient, AzureKeyCredential, ChatRequestUserMessage } from '@azure/openai';
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     //Available models are: gpt-4, gpt-35-turbo-16k, text-embedding-ada-002, text-embedding-3-small, gpt-4-vision, gpt-4-32k, gpt-35-turbo"
-    const { userPrompt } = await req.json();
+    const { media, userPrompt, mimeType, imageData   } = await req.json();
     const deploymentModelName = process.env.DEPLOY_MODEL_NAME_TEXT as string;
 
     const client = new OpenAIClient(process.env.AZURE_OPENAI_ENDPOINT as string, new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY as string));
@@ -14,26 +14,11 @@ export async function POST(req: NextRequest) {
 
     const systemPromptFacebook = "Imagine you're a skilled blogger with a knack for crafting engaging Facebook posts that resonate with a diverse audience. The user is providing you a HTML code containing product information, extract the details and generate a vibrant and engaging marketing copy suitable for posting on Facebook. Please incorporate emoticons in the copy, where relevant, to make it more appealing and interactive for the Facebook audience. The marketing copy must be between 150-250 words. Use a charming and friendly writing style to connect with readers, and incorporate bullet points with emojis if appropriate. Finish with up to 7 relevant single-word hashtags. The text should be structured as several paragraphs and could include bullet points(using an emoji as the bullet that correspond to the text described) if needed. The hashtags must be always single words and don't have any other special characters beside the '#' such as '\'. Remember, no extra commentary – just a captivating post with relevant hashtags. THE RESPONSE MUST BE ALWAYS WRITTEN IN ENGLISH.";
 
-    /* EXAMPLE USING GPT VISION
-    const url = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-    const deploymentName = "gpt-4-vision";
-    const messages: ChatRequestMessage[] = [{
-        role: "user", content: [{
-            type: "image_url",
-            imageUrl: {
-                url,
-                detail: "auto"
-            }
-        }]
-    }];
-    const result = await client.getChatCompletions(deploymentName, messages);
-    console.log(`Chatbot: ${result.choices[0].message?.content}`);
-    */
     // Possible content safety implementation
     //https://learn.microsoft.com/en-us/javascript/api/overview/azure/ai-content-safety-rest-readme?view=azure-node-preview
 
     try {
-        const responseScraping = await fetch(userPrompt);
+        /*const responseScraping = await fetch(userPrompt);
         const dataScraping = await responseScraping.text();
         const bodyStart = dataScraping.indexOf("<body");
         const bodyEnd = dataScraping.indexOf("</body>");
@@ -56,13 +41,37 @@ export async function POST(req: NextRequest) {
             console.log(`api scraping Input: ${messages[promptIndex++]}`);
             console.log(`api scraping Chatbot: ${completion}`);
         }
+        const text = choices[0].message?.content;*/
+
+        /* EXAMPLE USING GPT VISION*/
+        //const url = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg";
+        const url = "https://images.prismic.io/furbo-prismic/90e50198-0779-4663-8ae5-2e4dcbf0e8da_CAT+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840";
+        //const url = `data:image/${mimeType};base64,${imageData}`;
+        const deploymentName = "gpt-4-vision";
+        const messages: ChatRequestUserMessage[] = [{
+            role: "user", content: [
+                {
+                    type: "text",
+                    text: "What do you see in this picture?"
+                },
+                {
+                type: "image_url",
+                imageUrl: {
+                    url,
+                    detail: "auto"
+                }
+            }]
+        }];
+        console.log(`api image url: ${url}`);
+        const { choices } = await client.getChatCompletions(deploymentName, messages, { maxTokens: 700, temperature: 0.9 });
         const text = choices[0].message?.content;
+        console.log(`api image text: ${text}`);
 
         return NextResponse.json({
             text
         });
     } catch (error) {
-        console.log("api scraping error:", error);
+        console.log("api image error:", error);
         return NextResponse.json({
             text: "Unable to process the prompt. Please try again. Error:" + error
         });

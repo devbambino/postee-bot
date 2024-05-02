@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         const bodyStart = dataScraping.indexOf("<body");
         const bodyEnd = dataScraping.indexOf("</body>");
         const dataScrapingBody = dataScraping.substring(bodyStart, bodyEnd);
-        let limit32k = 32000 * 3;
+        let limit32k = 32000 * 2.5;
         if(limit32k > dataScrapingBody.length){
             limit32k = dataScrapingBody.length - 1;
         }
@@ -43,20 +43,15 @@ export async function POST(req: NextRequest) {
         let promptIndex = 0;
         console.log(`api link deploymentModelName: ${deploymentModelName} messages: ${messages}`);
         const { choices } = await client.getChatCompletions(deploymentModelName, messages, { maxTokens: 700, temperature: 0.8 });
-        for (const choice of choices) {
-            const completion = choice.message?.content;
-            console.log(`api link Input: ${messages[promptIndex++]}`);
-            console.log(`api link Chatbot: ${completion}`);
-        }
         const text = choices[0].message?.content;
 
         return NextResponse.json({
             text
         });
-    } catch (error) {
-        console.log("api link error:", error);
+    } catch (error: any) {
+        //console.log("api link error:", error);
         return NextResponse.json({
-            text: "Unable to process the prompt. Please try again. Error:" + error
+            text: "Unable to process the prompt. Please try again. Error:" + error.message
         });
     }
 }

@@ -1,10 +1,10 @@
-interface ResetButtonProps {
+interface ButtonResetProps {
     post: string;
     isLoading: boolean;
     onButtonClicked: () => void;
   }
   
-  export default function ResetButton({ post, isLoading, onButtonClicked }: ResetButtonProps) {
+  export default function ButtonReset({ post, isLoading, onButtonClicked }: ButtonResetProps) {
     return (
         <button
         className="inline-flex items-center w-full md:w-auto order-3 m-2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50"

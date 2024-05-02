@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     //Available models are: gpt-4, gpt-35-turbo-16k, text-embedding-ada-002, text-embedding-3-small, gpt-4-vision, gpt-4-32k, gpt-35-turbo"
     const { media, userPrompt, mimeType, imageData   } = await req.json();
-    const deploymentModelName = process.env.DEPLOY_MODEL_NAME_TEXT as string;
+    const deploymentModelName = process.env.DEPLOY_MODEL_NAME_IMAGE as string;
 
     const client = new OpenAIClient(process.env.AZURE_OPENAI_ENDPOINT as string, new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY as string));
 
@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
     try {
         //const url = "https://images.prismic.io/furbo-prismic/90e50198-0779-4663-8ae5-2e4dcbf0e8da_CAT+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840";
         const url = `data:image/${mimeType};base64,${imageData}`;
-        const deploymentName = "gpt-4-vision";
         const userMessage: ChatRequestUserMessage = {
             role: "user", content: [
                 {
@@ -43,18 +42,18 @@ export async function POST(req: NextRequest) {
             }]
         };
         const messages = [{ role: "system", content: systemPrompt }, userMessage];
-        console.log(`api image url: ${url}`);
-        const { choices } = await client.getChatCompletions(deploymentName, messages, { maxTokens: 700, temperature: 0.9 });
+        //console.log(`api image url: ${url}`);
+        const { choices } = await client.getChatCompletions(deploymentModelName, messages, { maxTokens: 700, temperature: 0.9 });
         const text = choices[0].message?.content;
-        console.log(`api image text: ${text}`);
+        //console.log(`api image text: ${text}`);
 
         return NextResponse.json({
             text
         });
-    } catch (error) {
-        console.log("api image error:", error);
+    } catch (error: any) {
+        //console.log("api image error:", error);
         return NextResponse.json({
-            text: "Unable to process the prompt. Please try again. Error:" + error
+            text: "Unable to process the prompt. Please try again. Error:" + error.message
         });
     }
 }

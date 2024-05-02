@@ -1,9 +1,9 @@
-interface GeneratePostButtonProps {
+interface ButtonGeneratePostProps {
     description: string;
     onButtonClicked: () => void;
 }
 
-export default function GeneratePostButton({ description, onButtonClicked }: GeneratePostButtonProps) {
+export default function ButtonGeneratePost({ description, onButtonClicked }: ButtonGeneratePostProps) {
     return (
         <button
             className="inline-flex text-center justify-center items-center w-full md:w-auto order-1 m-2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50"

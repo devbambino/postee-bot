@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     } catch (error: any) {
         //console.log("api image error:", error);
         return NextResponse.json({
-            text: "Unable to process the prompt. Please try again. Error:" + error.message
+            text: "Unable to process the prompt. Please contact the support team and show this error: " + error.message
         });
     }
 }

@@ -8,14 +8,23 @@ import ResetButton from "./components/resetbtn";
 import GeneratedPost from "./components/generatedpost";
 import Loading from "./components/loading";
 import SocialMediaSelector from "./components/socialmediaselector";
+import IconImage from "./components/iconimage";
+import IconLink from "./components/iconlink";
+import Welcome from "./components/welcome";
 
 export default function Chat() {
   // State variables with initial values
   const [isLoading, setIsLoading] = useState(false);
   const [link, setLink] = useState("");
   const [post, setPost] = useState("");
+  const [type, setType] = useState("");
 
-  // Options for social media platforms
+  // Options for input types and social media platforms
+  const types = [
+    { value: "image", name: "Use an image...", Icon: IconImage },
+    { value: "link", name: "From a link...", Icon: IconLink },
+  ];
+
   const medias = [
     { value: "linkedin", name: "Linkedin" },
     { value: "facebook", name: "Facebook" },
@@ -51,6 +60,11 @@ export default function Chat() {
   // Loading state UI
   if (isLoading) {
     return <Loading/>;
+  }
+
+  // Initial UI for selecting input type
+  if (!type) {
+    return <Welcome types={types} onTypeSelect={setType} />;
   }
 
   if (!post) {

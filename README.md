@@ -1,5 +1,5 @@
 # Postee Bot v1
-🚀 Helping small businesses and individuals connect with their audiences in a more meaningful way through engaging multimedia content for social networks.
+🚀 Helping small businesses sell more with engaging marketing content for social networks.
 
 ## Features
 Here's what you get:

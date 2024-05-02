@@ -14,9 +14,11 @@ Here's what you get:
 
 - 🎉 **Feature 5**: Feature 5 description.
 
-## Screenshots
+## Instrucctions
 
-### Image 1
+### Testing Shopify links
+
+List of 56 Shopify stores: (Click here)[https://www.referralcandy.com/blog/shopify-websites]
 
 ## Tech behind
 

@@ -14,21 +14,6 @@ export async function POST(req: NextRequest) {
 
     const systemPromptFacebook = "Imagine you're a skilled blogger with a knack for crafting engaging Facebook posts that resonate with a diverse audience. The user is providing you a HTML code containing product information, extract the details and generate a vibrant and engaging marketing copy suitable for posting on Facebook. Please incorporate emoticons in the copy, where relevant, to make it more appealing and interactive for the Facebook audience. The marketing copy must be between 150-250 words. Use a charming and friendly writing style to connect with readers, and incorporate bullet points with emojis if appropriate. Finish with up to 7 relevant single-word hashtags. The text should be structured as several paragraphs and could include bullet points(using an emoji as the bullet that correspond to the text described) if needed. The hashtags must be always single words and don't have any other special characters beside the '#' such as '\'. Remember, no extra commentary – just a captivating post with relevant hashtags. THE RESPONSE MUST BE ALWAYS WRITTEN IN ENGLISH.";
 
-    /* EXAMPLE USING GPT VISION
-    const url = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-    const deploymentName = "gpt-4-vision";
-    const messages: ChatRequestMessage[] = [{
-        role: "user", content: [{
-            type: "image_url",
-            imageUrl: {
-                url,
-                detail: "auto"
-            }
-        }]
-    }];
-    const result = await client.getChatCompletions(deploymentName, messages);
-    console.log(`Chatbot: ${result.choices[0].message?.content}`);
-    */
     // Possible content safety implementation
     //https://learn.microsoft.com/en-us/javascript/api/overview/azure/ai-content-safety-rest-readme?view=azure-node-preview
 
@@ -49,12 +34,12 @@ export async function POST(req: NextRequest) {
         ];
 
         let promptIndex = 0;
-        console.log(`api scraping deploymentModelName: ${deploymentModelName} messages: ${messages}`);
+        console.log(`api link deploymentModelName: ${deploymentModelName} messages: ${messages}`);
         const { choices } = await client.getChatCompletions(deploymentModelName, messages, { maxTokens: 700, temperature: 0.8 });
         for (const choice of choices) {
             const completion = choice.message?.content;
-            console.log(`api scraping Input: ${messages[promptIndex++]}`);
-            console.log(`api scraping Chatbot: ${completion}`);
+            console.log(`api link Input: ${messages[promptIndex++]}`);
+            console.log(`api link Chatbot: ${completion}`);
         }
         const text = choices[0].message?.content;
 
@@ -62,7 +47,7 @@ export async function POST(req: NextRequest) {
             text
         });
     } catch (error) {
-        console.log("api scraping error:", error);
+        console.log("api link error:", error);
         return NextResponse.json({
             text: "Unable to process the prompt. Please try again. Error:" + error
         });

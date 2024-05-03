@@ -13,20 +13,20 @@ interface InputAreaProps {
 
 export default function InputArea({ type, description, imagePreviewUrl, isLoading, onDescriptionChange, onFileChange }: InputAreaProps) {
     return (
-        <div className="justify-center items-center my-1 space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
+        <div className="justify-center items-center space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
             {/* ... input area content based on type ... */}
             <h3 className="text-md leading-6 font-semibold">
-                <span className="w-full text-xl text-green-500 font-bold">Step 2 / </span>
+                <span className="w-full text-xl text-yellow-500 font-bold">Step 3 / </span>
                 {
                     type == "image" ?
-                        "Upload the image of the product you want to use and write a short description explaining how you want us to use it..." :
-                        "Paste here the link of the Shopify product you want us to create an engaging marketing post from..." 
+                        "Upload the image and write a short description..." :
+                        "Paste here the link of the product..." 
                 }
             </h3>
             {
                 type == "image" ?
-                    <>
-                        <label className="flex flex-row text-center justify-center items-center sm:w-full md:w-1/2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50">
+                    <div className="w-full flex flex-col justify-center items-center space-y-4">
+                        <label className="flex flex-row text-center justify-center items-center sm:w-full md:w-1/2 font-bold hover:bg-blue-500 text-yellow-500 hover:text-white border border-blue-500 py-2 px-4 rounded disabled:opacity-50">
                             <input type="file" accept="image/*" onChange={onFileChange} />
                             <svg className="w-6 h-6 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fillRule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z" clipRule="evenodd" />
@@ -35,12 +35,12 @@ export default function InputArea({ type, description, imagePreviewUrl, isLoadin
                             Select image...
                         </label>
                         {imagePreviewUrl && (
-                            <div className="flex flex-row justify-center gap-2">
+                            <div className="w-full  flex flex-row justify-center gap-2">
                                 <img src={imagePreviewUrl} alt="Preview" style={{ height: "100%", maxHeight: "100px" }} />
-                                <textarea className="w-full min-h-[100px] border rounded text-black" name="article" disabled={isLoading} id="text" placeholder="Enter the short description here..." value={description} onChange={onDescriptionChange} />
+                                <textarea className="w-full min-h-[100px] border rounded text-black" name="article" disabled={isLoading} id="text" placeholder="..write HERE a short description given us additional info of the offering, ex. price $35 but offering 50% time limeted discount..." value={description} onChange={onDescriptionChange} />
                             </div>
                         )}
-                    </> :
+                    </div> :
                     <textarea className="w-full min-h-[50px] border rounded text-black" name="article" disabled={isLoading} id="text" placeholder="Enter the link here..." value={description} onChange={onDescriptionChange} />
             }
         </div>

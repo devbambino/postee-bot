@@ -6,7 +6,7 @@ interface ButtonGeneratePostProps {
 export default function ButtonGeneratePost({ description, onButtonClicked }: ButtonGeneratePostProps) {
     return (
         <button
-            className="inline-flex text-center justify-center items-center w-full md:w-auto order-1 m-2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-50"
+            className="inline-flex text-center justify-center items-center w-full md:w-1/2 m-2 font-bold hover:bg-blue-500 text-yellow-500 hover:text-white border-2 border-blue-500 py-2 px-4 rounded-lg disabled:opacity-50"
             disabled={!description}
             onClick={onButtonClicked}
         >

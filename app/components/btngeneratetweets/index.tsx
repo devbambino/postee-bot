@@ -6,7 +6,7 @@ interface ButtonGenerateTweetsProps {
 export default function ButtonGenerateTweets({ isLoading, onButtonClicked }: ButtonGenerateTweetsProps) {
     return (
         <button
-                className="inline-flex items-center w-full md:w-auto order-2 m-2 font-bold hover:bg-green-500 text-green-500 hover:text-white border border-green-500 py-2 px-4 rounded disabled:opacity-500"
+                className="inline-flex items-center w-full md:w-auto order-2 m-2 font-bold hover:bg-blue-500 text-yellow-500 hover:text-white border-2 border-blue-500 py-2 px-4 rounded disabled:opacity-500"
                 disabled={isLoading}
                 onClick={onButtonClicked}>
                 <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

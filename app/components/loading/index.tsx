@@ -2,8 +2,8 @@ export default function Loading() {
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="loader">
-                <div className="animate-pulse text-slate-300 flex flex-col justify-center items-center">
-                    <svg className="w-6 h-6 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                <div className="animate-pulse text-slate-300 flex flex-col justify-center items-center text-yellow-500">
+                    <svg className="w-8 h-8 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"

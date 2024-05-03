@@ -8,7 +8,7 @@ export default function GeneratedPost({ post, media, onButtonClicked }: Generate
     return (
         <div className="flex flex-col gap-2">
             <div className="space-y-2">
-                <h2 className="text-xl text-green-500 font-semibold tracking-tight">Here is the social network post:</h2>
+                <h2 className="text-xl text-yellow-500 font-semibold tracking-tight">Here is the social network post:</h2>
             </div>
             <textarea
                 className="min-h-[200px] border text-black p-3 m-2 rounded"
@@ -22,7 +22,7 @@ export default function GeneratedPost({ post, media, onButtonClicked }: Generate
                     Click the logo of the social network to copy to clipboard & open it:
                 </p>
                 <a
-                    className="hover:bg-green-500 text-green-500 hover:text-white border border-green-500 p-2 rounded disabled:opacity-50"
+                    className="hover:bg-blue-500 text-yellow-500 hover:text-white border-2 border-blue-500 p-2 rounded disabled:opacity-50"
                     href={
                         media == "instagram" ?
                             "https://www.instagram.com" :

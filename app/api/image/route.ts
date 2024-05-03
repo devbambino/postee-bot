@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     //https://learn.microsoft.com/en-us/javascript/api/overview/azure/ai-content-safety-rest-readme?view=azure-node-preview
 
     try {
-        //const url = "https://images.prismic.io/furbo-prismic/90e50198-0779-4663-8ae5-2e4dcbf0e8da_CAT+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840";
+        //const url = "https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840";
         const url = `data:image/${mimeType};base64,${imageData}`;
         const userMessage: ChatRequestUserMessage = {
             role: "user", content: [
@@ -51,9 +51,14 @@ export async function POST(req: NextRequest) {
             text
         });
     } catch (error: any) {
-        //console.log("api image error:", error);
+        console.log("api image error:", error);
+        if(error){
+            return NextResponse.json({
+                text: "Unable to process this request. Please contact the support team and show this error: " + error.message
+            });
+        }
         return NextResponse.json({
-            text: "Unable to process the prompt. Please contact the support team and show this error: " + error.message
+            text: "Unable to process this request. Please contact the support team."
         });
     }
 }

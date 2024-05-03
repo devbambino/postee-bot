@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
         ];
 
         let promptIndex = 0;
-        console.log(`api link deploymentModelName: ${deploymentModelName} messages: ${messages}`);
+        //console.log(`api link deploymentModelName: ${deploymentModelName} messages: ${messages}`);
         const { choices } = await client.getChatCompletions(deploymentModelName, messages, { maxTokens: 700, temperature: 0.8 });
         const text = choices[0].message?.content;
 
@@ -49,9 +49,14 @@ export async function POST(req: NextRequest) {
             text
         });
     } catch (error: any) {
-        //console.log("api link error:", error);
+        console.log("api link error:", error);
+        if(error){
+            return NextResponse.json({
+                text: "Unable to process this request. Please contact the support team and show this error: " + error.message
+            });
+        }
         return NextResponse.json({
-            text: "Unable to process the prompt. Please contact the support team and show this error: " + error.message
+            text: "Unable to process this request. Please contact the support team."
         });
     }
 }

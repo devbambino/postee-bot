@@ -27,8 +27,13 @@ export async function POST(req: NextRequest) {
         });
     } catch (error: any) {
         console.log("api tweets error:", error);
+        if(error){
+            return NextResponse.json({
+                text: "Unable to process this request. Please contact the support team and show this error: " + error.message
+            });
+        }
         return NextResponse.json({
-            text: "Unable to process the prompt. Please contact the support team and show this error: " + error.message
+            text: "Unable to process this request. Please contact the support team."
         });
     }
 }

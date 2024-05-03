@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
+import { blobToURL, fromBlob } from 'image-resize-compress';
 import GeneratedPost from "./components/generatedpost";
 import Loading from "./components/loading";
 import SocialMediaSelector from "./components/socialmediaselector";
@@ -45,7 +46,7 @@ export default function Chat() {
     navigator.clipboard.writeText(entryText);
     toast.success("Copied to clipboard!");
   }
-  
+
   // Event handlers for description, media change, and file upload 
   const handleDescription = (event: { target: { value: any; }; }) => {
     const value = event.target.value;
@@ -60,6 +61,48 @@ export default function Chat() {
     });
   };
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+    if (event.target.files) {
+      const file = event.target.files[0];
+
+      // quality value for webp and jpeg formats.
+      const quality = 80;
+      // output width. 0 will keep its original width and 'auto' will calculate its scale from height.
+      const width = 300;
+      // output height. 0 will keep its original height and 'auto' will calculate its scale from width.
+      const height = "auto";
+      // file format: png, jpeg, bmp, gif, webp. If null, original format will be used.
+      const format = 'jpeg';
+
+      // note only the blobFile argument is required
+      //let blob: Blob;
+      //const blob = fromBlob(file, quality, width, height, format);
+      fromBlob(file, quality, width, height, format).then((blob) => {
+        // will output the converted blob file
+        console.log(blob);
+        console.log(blob.type);
+
+        const fileType = file.type;
+        //setMimeType(fileType); // Set MIME type in state
+        setMimeType(blob.type); // Set MIME type in state
+  
+        if (/^image\/(jpeg|png|gif)$/.test(blob.type)) {
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            const resultBase64 = reader.result as string;
+            setImageData(resultBase64.split(",")[1]); // Set base64 string in state
+            setImagePreviewUrl(resultBase64); // Set image URL for preview
+          };
+          //reader.readAsDataURL(file);
+          reader.readAsDataURL(blob);
+        } else {
+          alert("File type not supported. Please upload an image (jpeg, png, gif).");
+        }
+      });
+    }
+  };
+  
+  const handleFileChangeB = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     if (file) {
       const fileType = file.type;
@@ -81,7 +124,7 @@ export default function Chat() {
 
   // Loading state UI
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   // Initial UI for selecting input type
@@ -137,7 +180,7 @@ export default function Chat() {
                   });
                   const data = await response.json();
                   setPost(data.text);
-                } 
+                }
                 setIsLoading(false);
               }} />
             )}

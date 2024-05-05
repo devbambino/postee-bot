@@ -195,8 +195,8 @@ export default function Chat() {
 
   // Main UI after input type selection
   return (
-    <div className="px-4 py-6 md:py-8 lg:py-10 bg-black">
-      <div className="flex flex-col gap-4 max-w-3xl mx-auto">
+    <div className="px-4 py-6 md:py-8 lg:py-10">
+      <div className="flex flex-col gap-4 max-w-3xl mx-auto bg-black">
         <div className="flex flex-row items-start gap-2 md:gap-4">
           {post && tweets.length == 0 && (
             <ButtonGenerateTweets isLoading={isLoading} onButtonClicked={async () => {

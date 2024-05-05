@@ -2,11 +2,8 @@ import { OpenAIClient, AzureKeyCredential, ChatRequestUserMessage, ChatRequestMe
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    //Available models are: gpt-4, gpt-35-turbo-16k, text-embedding-ada-002, text-embedding-3-small, gpt-4-vision, gpt-4-32k, gpt-35-turbo"
-    const { media, userPrompt, mimeType, imageData   } = await req.json();
+    const { media, userPrompt, mimeType, imageData, openaiEndpoint, openaiApikey } = await req.json();
     const deploymentModelName = process.env.DEPLOY_MODEL_NAME_IMAGE as string;
-
-    const client = new OpenAIClient(process.env.AZURE_OPENAI_ENDPOINT as string, new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY as string));
 
     const systemPromptLinkedin = "You're a LinkedIn influencer known for your insightful posts on industry trends and product recommendations. The user is providing you an image of a product that needs to be sold and a short description of it, interpret the information and formulate a professional, yet captivating marketing copy tailored for a LinkedIn audience. Where appropriate, include emojis to add a touch of personality, while maintaining the professional tone of the platform. The marketing copy must be between 150-250 words and concludes with up to 7 relevant hashtags (single words, no special characters). The text should be structured as several paragraphs and could include bullet points(using an emoji as the bullet that corresponds to the text described) if needed. The hashtags must be always single words and don't have any other special characters beside the '#' such as '\'. Remember, no additional text or recommendations – just the polished marketing copy and hashtags. THE RESPONSE MUST BE ALWAYS WRITTEN IN ENGLISH.";
 
@@ -25,6 +22,7 @@ export async function POST(req: NextRequest) {
     //https://learn.microsoft.com/en-us/javascript/api/overview/azure/ai-content-safety-rest-readme?view=azure-node-preview
 
     try {
+        const client = new OpenAIClient(openaiEndpoint, new AzureKeyCredential(openaiApikey));
         //const url = "https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840";
         const url = `data:image/${mimeType};base64,${imageData}`;
         const userMessage: ChatRequestUserMessage = {
@@ -42,23 +40,35 @@ export async function POST(req: NextRequest) {
             }]
         };
         const messages = [{ role: "system", content: systemPrompt }, userMessage];
-        //console.log(`api image url: ${url}`);
         const { choices } = await client.getChatCompletions(deploymentModelName, messages, { maxTokens: 700, temperature: 0.9 });
-        const text = choices[0].message?.content;
-        //console.log(`api image text: ${text}`);
+        let text = choices[0].message?.content;
+
+        const finishReason = choices[0].finishReason;
+        let isSafe = true;
+        if(finishReason == "content_filter"){
+            text = "This kind of content is not allowed in this app. Please contact the support team If you think this is a mistake.";
+            isSafe = false;
+        }
 
         return NextResponse.json({
-            text
+            text: text,
+            safe: isSafe
         });
     } catch (error: any) {
-        console.log("api image error:", error);
+        //console.log("api image error:", error);
         if(error){
+            let text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
+            if(error.code == "content_filter"){
+                text = "This kind of content is not allowed in this app. Reason: " + error.message;;
+            }
             return NextResponse.json({
-                text: "Unable to process this request. Please contact the support team and show this error: " + error.message
+                text: text,
+                safe: false
             });
         }
         return NextResponse.json({
-            text: "Unable to process this request. Please contact the support team."
+            text: "Unable to process this request. Please contact the support team.",
+            safe: false
         });
     }
 }

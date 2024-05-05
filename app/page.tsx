@@ -1,6 +1,5 @@
 "use client";
-
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { fromBlob } from 'image-resize-compress';
 import GeneratedPost from "./components/generatedpost";
@@ -24,6 +23,8 @@ export default function Chat() {
   const [imageData, setImageData] = useState<string | null>(null);
   const [mimeType, setMimeType] = useState<string | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [openaiEndpoint, setOpenaiEndpoint] = useState(process.env.AZURE_OPENAI_ENDPOINT as string);
+  const [openaiApikey, setOpenaiApikey] = useState(process.env.AZURE_OPENAI_API_KEY as string);
 
   // Options for input types and social media platforms
   const types = [
@@ -46,6 +47,37 @@ export default function Chat() {
   function copyText(entryText: string) {
     navigator.clipboard.writeText(entryText);
     toast.success("Copied to clipboard!");
+  }
+  // Function to check if apikey and endpoint are present
+  function checkOpenaiKey() {
+    if (openaiApikey && openaiApikey.trim().length > 0) {
+      return true;
+    } else {
+      alert("First you need to enter your Azure OpenAI key and endpoint, then please try again!");
+      const responseApikey = prompt("Your Azure Open AI ApiKey is required to continue (won't be stored permanently):");
+      if (responseApikey && responseApikey!.length > 0) {
+        setOpenaiApikey(responseApikey);
+        return true;
+      } else {
+        alert("Without a valid Azure Open AI ApiKey is not possible to continue");
+        setOpenaiApikey("");
+        return false;
+      }
+    }
+  }
+  function checkOpenaiEndpoint() {
+    if (openaiEndpoint && openaiEndpoint.trim().length > 0) {
+      return true;
+    } else {
+      const responseEndpoint = prompt("Your Azure Open AI Endpoint is required to continue (won't be stored permanently):");
+      if (responseEndpoint && responseEndpoint!.length > 0) {
+        setOpenaiEndpoint(responseEndpoint);
+      } else {
+        alert("Without a valid Azure Open AI Endpoint is not possible to continue");
+        setOpenaiEndpoint("");
+      }
+      return false;
+    }
   }
 
   // Event handlers for description, media change, and file upload with image scaling for optimazing tokens consumption and latency
@@ -109,37 +141,51 @@ export default function Chat() {
             <InputTypeSelector types={types} selectedType={state.type} onTypeChange={handleRadioChange} />
             <InputArea type={state.type} description={description} onDescriptionChange={handleDescription} onFileChange={handleFileChange} imagePreviewUrl={imagePreviewUrl} isLoading={false} />
             <ButtonGeneratePost description={description} onButtonClicked={async () => {
-              setIsLoading(true);
-              if (state.type == "image") {
-                const response = await fetch("api/image", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userPrompt: description,
-                    media: state.media,
-                    mimeType: mimeType,
-                    imageData: imageData
-                  }),
-                });
-                const data = await response.json();
-                setPost(data.text);
-              } else if (state.type == "link") {
-                const response = await fetch("api/link", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    userPrompt: description.trim(),
-                    media: state.media,
-                  }),
-                });
-                const data = await response.json();
-                setPost(data.text);
+              if (checkOpenaiKey() && checkOpenaiEndpoint()) {
+                setIsLoading(true);
+                if (state.type == "image") {
+                  const response = await fetch("api/image", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      openaiApikey: openaiApikey,
+                      openaiEndpoint: openaiEndpoint,
+                      userPrompt: description,
+                      media: state.media,
+                      mimeType: mimeType,
+                      imageData: imageData
+                    }),
+                  });
+                  const data = await response.json();
+                  if (data.safe) {
+                    setPost(data.text);
+                  } else {
+                    alert(data.text)
+                  }
+                } else if (state.type == "link") {
+                  const response = await fetch("api/link", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      openaiApikey: openaiApikey,
+                      openaiEndpoint: openaiEndpoint,
+                      userPrompt: description.trim(),
+                      media: state.media,
+                    }),
+                  });
+                  const data = await response.json();
+                  if (data.safe) {
+                    setPost(data.text);
+                  } else {
+                    alert(data.text)
+                  }
+                }
+                setIsLoading(false);
               }
-              setIsLoading(false);
             }} />
           </div>
         </div>
@@ -161,6 +207,8 @@ export default function Chat() {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                  openaiApikey: openaiApikey,
+                  openaiEndpoint: openaiEndpoint,
                   userPrompt: post,
                 }),
               });
@@ -175,7 +223,12 @@ export default function Chat() {
             }} />
           )}
           <ButtonReset post={post} isLoading={isLoading} onButtonClicked={async () => {
-            window.location.reload();
+            setPost("");
+            setDescription("");
+            setTweets([]);
+            setImageData("");
+            setImagePreviewUrl("");
+            setMimeType("");
           }} />
         </div>
 

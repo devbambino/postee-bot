@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/nabvar";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Navbar />
         <Toaster position="bottom-center" />
         <SpeedInsights />
+        <Analytics />
         {children}
       </body>
     </html>

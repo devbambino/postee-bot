@@ -143,46 +143,54 @@ export default function Chat() {
             <ButtonGeneratePost description={description} onButtonClicked={async () => {
               if (checkOpenaiKey() && checkOpenaiEndpoint()) {
                 setIsLoading(true);
-                if (state.type == "image") {
-                  const response = await fetch("api/image", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      openaiApikey: openaiApikey,
-                      openaiEndpoint: openaiEndpoint,
-                      userPrompt: description,
-                      media: state.media,
-                      mimeType: mimeType,
-                      imageData: imageData
-                    }),
-                  });
-                  const data = await response.json();
-                  if (data.safe) {
-                    setPost(data.text);
-                  } else {
-                    alert(data.text)
+                try {
+                  if (state.type == "image") {
+                    const response = await fetch("api/image", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        openaiApikey: openaiApikey,
+                        openaiEndpoint: openaiEndpoint,
+                        userPrompt: description,
+                        media: state.media,
+                        mimeType: mimeType,
+                        imageData: imageData
+                      }),
+                    });
+                    const data = await response.json();
+                    if (data.safe) {
+                      setPost(data.text);
+                    } else {
+                      alert(data.text)
+                    }
+                  } else if (state.type == "link") {
+                    const response = await fetch("api/link", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        openaiApikey: openaiApikey,
+                        openaiEndpoint: openaiEndpoint,
+                        userPrompt: description.trim(),
+                        media: state.media,
+                      }),
+                    });
+                    const data = await response.json();
+                    if (data.safe) {
+                      setPost(data.text);
+                    } else {
+                      alert(data.text)
+                    }
                   }
-                } else if (state.type == "link") {
-                  const response = await fetch("api/link", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      openaiApikey: openaiApikey,
-                      openaiEndpoint: openaiEndpoint,
-                      userPrompt: description.trim(),
-                      media: state.media,
-                    }),
-                  });
-                  const data = await response.json();
-                  if (data.safe) {
-                    setPost(data.text);
-                  } else {
-                    alert(data.text)
+                } catch (error: any) {
+                  let text = "Unable to process this request. Please contact the support team.";
+                  if (error) {
+                    text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
                   }
+                  alert(text);
                 }
                 setIsLoading(false);
               }
@@ -195,30 +203,38 @@ export default function Chat() {
 
   // Main UI after input type selection
   return (
-    <div className="px-4 py-6 md:py-8 lg:py-10">
+    <div className="px-4 py-6 md:py-8 lg:py-10 bg-black">
       <div className="flex flex-col gap-4 max-w-3xl mx-auto bg-black">
-        <div className="flex flex-row items-start gap-2 md:gap-4">
+        <div className="flex flex-row items-start gap-2 md:gap-4 bg-black">
           {post && tweets.length == 0 && (
             <ButtonGenerateTweets isLoading={isLoading} onButtonClicked={async () => {
               setIsLoading(true);
-              const response = await fetch("api/tweets", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  openaiApikey: openaiApikey,
-                  openaiEndpoint: openaiEndpoint,
-                  userPrompt: post,
-                }),
-              });
-              const data = await response.json();
-              const cleanedJsonString = data.text.replace(/^```json\s*|```\s*$/g, "");
-              const tweetsJson = JSON.parse(cleanedJsonString);
-              tweetsJson.map((tweet: { tweet: string; }) => (
-                tweets.push(tweet.tweet)
-              ));
-              setTweets(tweets);
+              try {
+                const response = await fetch("api/tweets", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    openaiApikey: openaiApikey,
+                    openaiEndpoint: openaiEndpoint,
+                    userPrompt: post,
+                  }),
+                });
+                const data = await response.json();
+                const cleanedJsonString = data.text.replace(/^```json\s*|```\s*$/g, "");
+                const tweetsJson = JSON.parse(cleanedJsonString);
+                tweetsJson.map((tweet: { tweet: string; }) => (
+                  tweets.push(tweet.tweet)
+                ));
+                setTweets(tweets);
+              } catch (error: any) {
+                let text = "Unable to process this request. Please contact the support team.";
+                if (error) {
+                  text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
+                }
+                alert(text);
+              }
               setIsLoading(false);
             }} />
           )}

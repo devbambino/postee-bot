@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
             safe: isSafe
         });
     } catch (error: any) {
-        //console.log("api image error:", error);
+        console.log("api image error:", error);
         if(error){
             let text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
             if(error.code == "content_filter"){

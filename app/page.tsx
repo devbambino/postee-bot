@@ -186,6 +186,7 @@ export default function Chat() {
                     }
                   }
                 } catch (error: any) {
+                  console.log("link error:", error);
                   let text = "Unable to process this request. Please contact the support team.";
                   if (error) {
                     text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
@@ -229,6 +230,7 @@ export default function Chat() {
                 ));
                 setTweets(tweets);
               } catch (error: any) {
+                console.log("tweets error:", error);
                 let text = "Unable to process this request. Please contact the support team.";
                 if (error) {
                   text = "Unable to process this request. Please contact the support team and show this error: " + error.message;

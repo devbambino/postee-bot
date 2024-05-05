@@ -2,7 +2,7 @@
 
 PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram. ✨ 
 
-### Here's how it works:
+## Here's how it works:
 
 *   **Step 1: Select Your Platform 📢** Choose the social media platform where you want to post your content. 
 *   **Step 2: Choose Your Input 🔗🖼️** Decide whether you want to use a product link or an image as the basis for your post. 
@@ -12,20 +12,21 @@ PosteeBot is a cutting-edge React.js app designed to help small businesses gener
 **PosteeBot also offers an innovative "Generate Tweets" feature to create engaging Twitter threads from your post!** 🧵
 
 
-### On the shoulders of giants:
+## On the shoulders of giants:
 
 PosteeBot leverages the power of Azure OpenAI to deliver:
 
-*   **Targeted Content:**  Platform-specific language and style for optimal engagement. 🎯
-*   **Professional Tone:**  Maintains professionalism while adding personality.  💼
-*   **Visual Storytelling:**  Strategic use of emojis to enhance the message.  ✅
-*   **Hashtag Optimization:**  Includes relevant hashtags for increased visibility.  #️⃣ 
+*   🎯 **Targeted Content:**  Platform-specific language and style for optimal engagement. 
+*   💼 **Professional Tone:**  Maintains professionalism while adding personality.  
+*   ✅ **Visual Storytelling:**  Strategic use of emojis to enhance the message.  
+*   #️⃣ **Hashtag Optimization:**  Includes relevant hashtags for increased visibility.   
+*   🛡️ **Committed to Responsible AI:** We've implemented safety measures to prevent our AI from generating harmful content. This includes filtering for categories like harassment, hate speech, sexually explicit material, and dangerous suggestions.
 
 Using Azure OpenAI javascript SDK from (here)[https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview]
 
 **PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
 
-#SocialMediaMarketing #AI \#ReactJS #SmallBusiness #MarketingTools #ContentCreation #PosteeBot 
+#SocialMediaMarketing #AI #ReactJS #SmallBusiness #MarketingTools #ContentCreation #PosteeBot 
 
 
 ## How to use it:
@@ -43,7 +44,7 @@ If you don't do that then the app will ask you to enter the api key and endpoint
 ### Run the app
 `npm run dev`
 
-### Testing Shopify links
+### Testing Shopify links and product images
 
 List of 56 Shopify stores: (Click here)[https://www.referralcandy.com/blog/shopify-websites]
 

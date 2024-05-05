@@ -12,7 +12,7 @@ export default function InputTypeSelector({ types, selectedType, onTypeChange }:
     return (
         <div className="my-3 space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
             {/* ... type selection content ... */}
-            <h3 className="text-md font-semibold"><span className="w-full text-xl text-yellow-500 font-bold">Step 2 /</span> Select what you want to use for creating your compelling marketing post:</h3>
+            <h3 className="text-md font-semibold text-white"><span className="w-full text-xl text-yellow-500 font-bold">Step 2 /</span> Select what you want to use for creating your compelling marketing post:</h3>
             <div className="flex flex-wrap justify-center">
                 {types.map(({ value, name, Icon }) => (
                     <div

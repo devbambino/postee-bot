@@ -10,7 +10,7 @@ export default function SocialMediaSelector({ medias, selectedMedia, onMediaChan
     return (
         <div className="mt-4 space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
             {/* ... social media selection content ... */}
-            <h3 className="text-md font-semibold"><span className="w-full text-xl text-yellow-500 font-bold">Step 1 /</span> Select the social network...</h3>
+            <h3 className="text-md font-semibold text-white"><span className="w-full text-xl text-yellow-500 font-bold">Step 1 /</span> Select the social network...</h3>
             <div className="flex flex-wrap justify-center">
                 {medias.map(({ value, name }) => (
                     <div

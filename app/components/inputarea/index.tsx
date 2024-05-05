@@ -15,7 +15,7 @@ export default function InputArea({ type, description, imagePreviewUrl, isLoadin
     return (
         <div className="justify-center items-center space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
             {/* ... input area content based on type ... */}
-            <h3 className="text-md leading-6 font-semibold">
+            <h3 className="text-md leading-6 font-semibold text-white">
                 <span className="w-full text-xl text-yellow-500 font-bold">Step 3 / </span>
                 {
                     type == "image" ?

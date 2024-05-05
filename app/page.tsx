@@ -128,7 +128,7 @@ export default function Chat() {
   // Initial UI for selecting input type
   if (!post) {
     return (
-      <div className="flex flex-col h-screen w-full">
+      <div className="flex flex-col h-screen w-full bg-black">
         <div className="flex-1 flex items-center justify-center p-4 text-center">
           <div className="flex justify-center items-center flex-col gap-2">
             {/* ... welcome message... */}
@@ -195,7 +195,7 @@ export default function Chat() {
 
   // Main UI after input type selection
   return (
-    <div className="px-4 py-6 md:py-8 lg:py-10">
+    <div className="px-4 py-6 md:py-8 lg:py-10 bg-black">
       <div className="flex flex-col gap-4 max-w-3xl mx-auto">
         <div className="flex flex-row items-start gap-2 md:gap-4">
           {post && tweets.length == 0 && (

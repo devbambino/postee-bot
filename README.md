@@ -1,6 +1,6 @@
 # 🤖 PosteeBot: Your AI-Powered Social Media Marketing Partner! 
 
-PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram. ✨ 
+PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram, from their e-commerce sites. ✨ 
 
 ## Here's how it works:
 
@@ -22,7 +22,7 @@ PosteeBot leverages the power of Azure OpenAI to deliver:
 *   #️⃣ **Hashtag Optimization:**  Includes relevant hashtags for increased visibility.   
 *   🛡️ **Committed to Responsible AI:** We've implemented safety measures to prevent our AI from generating harmful content. This includes filtering for categories like harassment, hate speech, sexually explicit material, and dangerous suggestions.
 
-Using Azure OpenAI javascript SDK from (here)[https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview]
+This app is using Azure OpenAI javascript SDK from (here)[https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview]
 
 **PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
 

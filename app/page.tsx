@@ -128,9 +128,9 @@ export default function Chat() {
   // Initial UI for selecting input type
   if (!post) {
     return (
-      <div className="flex flex-col h-screen w-full bg-black">
+      <div className="flex flex-col h-screen w-full">
         <div className="flex-1 flex items-center justify-center p-4 text-center">
-          <div className="flex justify-center items-center flex-col gap-2">
+          <div className="flex justify-center items-center flex-col gap-2 bg-black">
             {/* ... welcome message... */}
             <h2 className="w-full text-center text-2xl text-yellow-500 font-bold">Welcome to PosteeBot</h2>
             <p className="w-full text-center text-md text-yellow-200">

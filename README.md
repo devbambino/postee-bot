@@ -2,6 +2,8 @@
 
 PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram, from their e-commerce sites. ✨ 
 
+**Demo:** https://postee-bot.vercel.app/
+
 ## Here's how it works:
 
 *   **Step 1: Select Your Platform 📢** Choose the social media platform where you want to post your content. 
@@ -34,7 +36,7 @@ This app is using Azure OpenAI javascript SDK from (here)[https://learn.microsof
 ### Install all the dependencies
 `npm install`
 
-### Your Azure AI api key and ednpoint
+### Add your Azure AI api key and ednpoint
 Include your Azure AI api key and endpoint inside .env with the variable name: 
 `AZURE_OPENAI_API_KEY="your_key_here"`
 `AZURE_OPENAI_ENDPOINT="your_endpoint_here"`

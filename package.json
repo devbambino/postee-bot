@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@azure/openai": "^1.0.0-beta.12",
+    "@vercel/speed-insights": "^1.0.10",
     "image-resize-compress": "^1.1.0",
     "next": "14.2.3",
     "node": "^22.0.0",

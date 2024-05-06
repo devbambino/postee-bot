@@ -9,10 +9,16 @@ PosteeBot is a cutting-edge AI react.js app designed to help small businesses se
 *   **Step 1: Select Your Platform 📢** Choose the social media platform where you want to post your content. 
 *   **Step 2: Choose Your Input 🔗🖼️** Decide whether you want to use a product link or an image as the basis for your post. 
 *   **Step 3: Provide Details ✍️** If using an image, upload it and add a brief description. For links, simply paste the URL. 
+<img src="res/postee-home.png" width="566" height="300">
+<img src="res/postee-image.png" width="566" height="300">
 *   **Generate & Share! 🪄** Click "Generate Post" and PosteeBot will craft compelling marketing copy tailored to your chosen platform, complete with relevant emojis and hashtags. You can then easily copy the text and share it directly on your social media. 
+<img src="res/postee-link-result.png" width="566" height="300">
+<img src="res/postee-link-result-linkedin.png" width="566" height="300">
+<img src="res/postee-image-result.png" width="566" height="300">
 
 **PosteeBot also offers an innovative "Generate Tweets" feature to create engaging Twitter threads from your post!** 🧵
-
+<img src="res/postee-link-result-tweets.png" width="566" height="300">
+<img src="res/postee-link-result-tweets-twitter.png" width="566" height="300">
 
 ## On the shoulders of giants:
 
@@ -27,6 +33,8 @@ PosteeBot leverages the power of Azure OpenAI to deliver:
 This app is using Azure OpenAI javascript SDK from [here](https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview)
 
 **PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
+
+<img src="res/postee-magic.png" width="566" height="300">
 
 #SocialMediaMarketing #AI #ReactJS #SmallBusiness #MarketingTools #ContentCreation #PosteeBot 
 

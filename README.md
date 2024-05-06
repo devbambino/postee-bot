@@ -19,10 +19,11 @@ PosteeBot is a cutting-edge AI react.js app designed to help small businesses se
 <img src="res/postee-link-result-linkedin.png" width="566" height="300">
 <img src="res/postee-image-result.png" width="566" height="300">
 
-**PosteeBot also offers an innovative "Generate Tweets" feature to create engaging Twitter threads from your post!** 🧵
+*   **PosteeBot also offers an innovative "Generate Tweets" feature to create engaging Twitter threads from your post!** 🧵
 
 <img src="res/postee-link-result-tweets.png" width="566" height="300">
 <img src="res/postee-link-result-tweets-twitter.png" width="566" height="300">
+
 
 ## On the shoulders of giants:
 
@@ -36,7 +37,7 @@ PosteeBot leverages the power of Azure OpenAI to deliver:
 
 This app is using Azure OpenAI javascript SDK from [here](https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview)
 
-**PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
+*   🚀 **PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
 
 <img src="res/postee-magic.png" width="566" height="300">
 

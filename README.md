@@ -2,7 +2,7 @@
 
 PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram, from their e-commerce sites. ✨ 
 
-**Demo:** https://postee-bot.vercel.app/
+**Demo:** https://postee-bot-3pvcqzxkfa-uc.a.run.app/
 
 ## Here's how it works:
 
@@ -46,12 +46,13 @@ If you don't do that then the app will ask you to enter the api key and endpoint
 ### Run the app
 `npm run dev`
 
-### Testing Shopify links and product images
+### Testing product links and product images
 
 List of 56 Shopify stores: [Click here](https://www.referralcandy.com/blog/shopify-websites)
 
-A product page for a dog camera [Click here](https://furbo.com/us/products/furbo-360-dog-camera)
-The corresponding image for the dog camera [Click here](https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840)
+A product page for a dog camera, copy the link: [Click here](https://furbo.com/us/products/furbo-360-dog-camera)
+
+The corresponding image for the dog camera, so download it and then click "select image" inside the app: [Click here](https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840)
 
 
 ## Troubleshooting

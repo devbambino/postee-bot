@@ -1,6 +1,6 @@
 # 🤖 PosteeBot: Your AI-Powered Social Media Marketing Partner! 
 
-PosteeBot is a cutting-edge React.js app designed to help small businesses generate captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram, from their e-commerce sites. ✨ 
+PosteeBot is a cutting-edge React.js app designed to help small businesses sell more by generate really engaging and captivating marketing content for social media platforms like LinkedIn, Facebook, and Instagram, from their e-commerce sites. ✨ 
 
 **Demo:** https://postee-bot-3pvcqzxkfa-uc.a.run.app/
 
@@ -41,7 +41,8 @@ Include your Azure AI api key and endpoint inside .env with the variable name:
 `AZURE_OPENAI_API_KEY="your_key_here"`
 `AZURE_OPENAI_ENDPOINT="your_endpoint_here"`
 
-If you don't do that then the app will ask you to enter the api key and endpoint the first time you try to generate a post. The credentials you enter there are not stored permanently anywhere in the app and they are going to be available just while you have the page open.
+> [!WARNING]  
+> If you don't do that then the app will ask you to enter the api key and endpoint the first time you try to generate a post. The credentials you enter there are not stored permanently anywhere in the app and they are going to be available just while you have the page open.
 
 ### Run the app
 `npm run dev`

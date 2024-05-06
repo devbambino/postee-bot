@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
             safe: isSafe
         });
     } catch (error: any) {
-        console.log("api link error:", error);
+        //console.log("api link error:", error);
         if(error){
             let text = "Unable to process this request. Please contact the support team and show this error: " + error.message;
             if(error.code == "content_filter"){

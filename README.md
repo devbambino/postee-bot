@@ -24,7 +24,7 @@ PosteeBot leverages the power of Azure OpenAI to deliver:
 *   #️⃣ **Hashtag Optimization:**  Includes relevant hashtags for increased visibility.   
 *   🛡️ **Committed to Responsible AI:** We've implemented safety measures to prevent our AI from generating harmful content. This includes filtering for categories like harassment, hate speech, sexually explicit material, and dangerous suggestions.
 
-This app is using Azure OpenAI javascript SDK from (here)[https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview]
+This app is using Azure OpenAI javascript SDK from [here](https://learn.microsoft.com/en-us/javascript/api/overview/azure/openai-readme?view=azure-node-preview)
 
 **PosteeBot is your one-stop solution for creating high-quality social media content that drives results!** 🚀
 
@@ -48,10 +48,10 @@ If you don't do that then the app will ask you to enter the api key and endpoint
 
 ### Testing Shopify links and product images
 
-List of 56 Shopify stores: (Click here)[https://www.referralcandy.com/blog/shopify-websites]
+List of 56 Shopify stores: [Click here](https://www.referralcandy.com/blog/shopify-websites)
 
-A product page for a dog camera (here)[https://furbo.com/us/products/furbo-360-dog-camera]
-The corresponding image for the dog camera (here)[https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840]
+A product page for a dog camera [Click here](https://furbo.com/us/products/furbo-360-dog-camera)
+The corresponding image for the dog camera [Click here](https://images.prismic.io/furbo-prismic/baebe4b9-ea9d-422a-a2ba-26b63e25c0d7_DOG+PDP_Prod+img_1.jpg?auto=compress%2Cformat&fit=max&w=3840)
 
 
 ## Troubleshooting
